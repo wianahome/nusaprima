@@ -11,7 +11,8 @@ function HeroP5Animation() {
   const p5Instance = useRef<p5 | null>(null)
 
   useEffect(() => {
-    if (!containerRef.current) return
+    // PENGAMAN 1: Cek apakah window tersedia (hanya jalan di browser)
+    if (typeof window === 'undefined' || !containerRef.current) return
 
     const sketch = (p: p5) => {
       const particles: Array<{
@@ -33,7 +34,8 @@ function HeroP5Animation() {
       let time = 0
 
       p.setup = () => {
-        const canvas = p.createCanvas(p.windowWidth, p.windowHeight)
+        // PENGAMAN 2: Gunakan p.windowWidth dengan fallback
+        const canvas = p.createCanvas(p.windowWidth || 800, p.windowHeight || 600)
         canvas.style('position', 'absolute')
         canvas.style('top', '0')
         canvas.style('left', '0')
@@ -95,8 +97,6 @@ function HeroP5Animation() {
         // Update and draw particles
         for (let i = 0; i < particles.length; i++) {
           const particle = particles[i]
-          
-          // Mouse attraction
           const dMouse = p.dist(mouseX, mouseY, particle.x, particle.y)
           if (dMouse < mouseInfluence && dMouse > 0) {
             const force = p.map(dMouse, 0, mouseInfluence, 0.5, 0)
@@ -104,36 +104,26 @@ function HeroP5Animation() {
             particle.vy += (mouseY - particle.y) / dMouse * force * 0.02
           }
 
-          // Add some turbulence
           particle.vx += p.noise(particle.x * 0.01, time) * 0.1 - 0.05
           particle.vy += p.noise(particle.y * 0.01, time + 100) * 0.1 - 0.05
-
-          // Damping
           particle.vx *= 0.98
           particle.vy *= 0.98
-
-          // Velocity limits
           particle.vx = p.constrain(particle.vx, -2, 2)
           particle.vy = p.constrain(particle.vy, -2, 2)
-
           particle.x += particle.vx
           particle.y += particle.vy
 
-          // Wrap around
           if (particle.x < -50) particle.x = p.width + 50
           if (particle.x > p.width + 50) particle.x = -50
           if (particle.y < -50) particle.y = p.height + 50
           if (particle.y > p.height + 50) particle.y = -50
 
-          // Pulse animation
           particle.pulse += particle.pulseSpeed
           const pulseScale = 1 + p.sin(particle.pulse) * 0.3
 
-          // Draw connections
           for (let j = i + 1; j < particles.length; j++) {
             const other = particles[j]
             const d = p.dist(particle.x, particle.y, other.x, other.y)
-            
             if (d < connectionDistance) {
               const alpha = p.map(d, 0, connectionDistance, 120, 0)
               const gradient = p.map(d, 0, connectionDistance, 1, 0.3)
@@ -148,26 +138,18 @@ function HeroP5Animation() {
             }
           }
 
-          // Draw particle with glow
           p.noStroke()
-          
-          // Outer glow
           for (let g = 4; g >= 0; g--) {
             const glowAlpha = (particle.alpha / 15) * (1 - g / 4)
             p.fill(primaryColor.r, primaryColor.g, primaryColor.b, glowAlpha)
             p.ellipse(particle.x, particle.y, particle.size * (4 + g * 2) * pulseScale)
           }
-
-          // Core particle
           p.fill(primaryColor.r, primaryColor.g, primaryColor.b, particle.alpha)
           p.ellipse(particle.x, particle.y, particle.size * pulseScale)
-
-          // Bright center
           p.fill(255, 255, 255, particle.alpha * 0.8)
           p.ellipse(particle.x, particle.y, particle.size * 0.4 * pulseScale)
         }
 
-        // Draw floating code symbols
         const symbols = ['<>', '/>', '{}', '[]', '()', '/*', '*/']
         p.textFont('monospace')
         p.textSize(14)
@@ -186,6 +168,7 @@ function HeroP5Animation() {
       }
     }
 
+    // PENGAMAN 3: Inisialisasi p5 HANYA di dalam useEffect
     p5Instance.current = new p5(sketch, containerRef.current)
 
     return () => {
@@ -234,7 +217,6 @@ export function Hero() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -246,10 +228,8 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-primary/10" />
       </div>
 
-      {/* P5.js Animation Layer */}
       <HeroP5Animation />
 
-      {/* Animated Gradient Orbs */}
       <motion.div
         animate={{
           scale: [1, 1.2, 1],
@@ -275,7 +255,6 @@ export function Hero() {
         className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[150px] pointer-events-none"
       />
 
-      {/* Floating Icons */}
       {floatingIcons.map(({ Icon, delay, position }, index) => (
         <motion.div
           key={index}
@@ -300,13 +279,11 @@ export function Hero() {
         </motion.div>
       ))}
 
-      {/* Main Content */}
       <motion.div 
         style={{ y, opacity, scale }}
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32"
       >
         <div className="text-center">
-          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -329,7 +306,6 @@ export function Hero() {
             />
           </motion.div>
 
-          {/* Main Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -368,7 +344,6 @@ export function Hero() {
             </span>
           </motion.h1>
 
-          {/* Animated Line */}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
@@ -376,62 +351,38 @@ export function Hero() {
             className="h-1 w-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-transparent via-primary to-transparent"
           />
 
-          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
             className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 text-pretty leading-relaxed"
           >
-            Kami menciptakan website{' '}
-            <span className="text-primary font-semibold">modern</span>,{' '}
-            <span className="text-primary font-semibold">responsif</span>, dan{' '}
-            <span className="text-primary font-semibold">berkinerja tinggi</span>{' '}
-            yang membantu bisnis Anda berkembang di era digital.
+            Kami menciptakan website <span className="text-primary font-semibold">modern</span>, <span className="text-primary font-semibold">responsif</span>, dan <span className="text-primary font-semibold">berkinerja tinggi</span> yang membantu bisnis Anda berkembang di era digital.
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-primary to-cyan-500 hover:from-primary/90 hover:to-cyan-500/90 text-primary-foreground px-10 py-7 text-lg font-semibold group shadow-lg shadow-primary/25 border-0"
-              >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button size="lg" className="bg-gradient-to-r from-primary to-cyan-500 hover:from-primary/90 hover:to-cyan-500/90 text-primary-foreground px-10 py-7 text-lg font-semibold group shadow-lg shadow-primary/25 border-0">
                 <span>Konsultasi Gratis</span>
-                <motion.span
-                  className="ml-2"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
+                <motion.span className="ml-2" animate={{ x: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
                   <ArrowRight className="w-5 h-5" />
                 </motion.span>
               </Button>
             </motion.div>
             
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-primary/50 hover:bg-primary/10 hover:border-primary px-10 py-7 text-lg font-semibold group backdrop-blur-sm"
-              >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button size="lg" variant="outline" className="border-primary/50 hover:bg-primary/10 hover:border-primary px-10 py-7 text-lg font-semibold group backdrop-blur-sm">
                 <Play className="w-5 h-5 mr-2 text-primary" />
                 <span>Lihat Demo</span>
               </Button>
             </motion.div>
           </motion.div>
 
-          {/* Stats Cards */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -449,28 +400,16 @@ export function Hero() {
                 initial={{ opacity: 0, y: 30, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                whileHover={{ 
-                  y: -10,
-                  transition: { duration: 0.3 }
-                }}
+                whileHover={{ y: -10, transition: { duration: 0.3 } }}
                 className="group relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl blur-xl from-primary/20 to-cyan-500/20" />
                 <div className="relative flex flex-col items-center p-6 rounded-2xl bg-card/40 backdrop-blur-md border border-border/50 group-hover:border-primary/50 transition-all duration-300 overflow-hidden">
                   <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                  <motion.div
-                    whileHover={{ rotate: 360, scale: 1.2 }}
-                    transition={{ duration: 0.5 }}
-                    className={`p-3 rounded-xl bg-gradient-to-r ${stat.color} mb-3`}
-                  >
+                  <motion.div whileHover={{ rotate: 360, scale: 1.2 }} transition={{ duration: 0.5 }} className={`p-3 rounded-xl bg-gradient-to-r ${stat.color} mb-3`}>
                     <stat.icon className="w-6 h-6 text-white" />
                   </motion.div>
-                  <motion.span 
-                    className="text-3xl lg:text-4xl font-bold text-foreground"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1 + index * 0.1 }}
-                  >
+                  <motion.span className="text-3xl lg:text-4xl font-bold text-foreground" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 + index * 0.1 }}>
                     {stat.value}
                   </motion.span>
                   <span className="text-sm text-muted-foreground mt-1">{stat.label}</span>
@@ -481,34 +420,15 @@ export function Hero() {
         </div>
       </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-2 cursor-pointer group"
-          onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-        >
-          <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">
-            Scroll untuk eksplorasi
-          </span>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }} className="flex flex-col items-center gap-2 cursor-pointer group" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
+          <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors">Scroll untuk eksplorasi</span>
           <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/50 group-hover:border-primary/50 flex items-start justify-center p-1 transition-colors">
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1.5 h-3 rounded-full bg-primary"
-            />
+            <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-1.5 h-3 rounded-full bg-primary" />
           </div>
           <ChevronDown className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
         </motion.div>
       </motion.div>
-
-      {/* Bottom Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none z-10" />
     </section>
   )
