@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Sparkles, Code2, Zap, Globe, Cpu, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 function HeroP5Animation() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -191,9 +192,10 @@ export function Hero() {
         </motion.div>
       ))}
 
+
       {/* Main Content */}
       <motion.div style={{ y, opacity }} className="relative z-20 text-center px-4">
-        <motion.h1 className="text-6xl lg:text-8xl font-bold tracking-tight mb-6">
+        <motion.h1 className="text-6xl lg:text-8xl font-bold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
           Wujudkan Website <br />
           <AnimatePresence mode="wait">
             <motion.span
@@ -201,7 +203,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400"
+              className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-600"
             >
               {words[currentWord]}
             </motion.span>
@@ -209,19 +211,48 @@ export function Hero() {
           {' '}Anda
         </motion.h1>
 
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-          Digital Agency di Bali yang fokus pada performa Next.js dan desain premium.
+        <p className="text-2xl text-muted-foreground max-w-2xl mx-auto mb-10">
+          Digital Agency yang fokus pada performa dan desain premium.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-lg shadow-primary/20">
-            Konsultasi Gratis
-          </Button>
-          <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full backdrop-blur-md">
-            Lihat Portfolio
-          </Button>
-        </div>
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+  {/* Tombol Konsultasi Gratis (Background Yellow-600) */}
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="relative group"
+  >
+    {/* Glow Effect */}
+    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-amber-600 rounded-full blur-md opacity-70 group-hover:opacity-100 group-hover:blur-xl transition-all duration-300" />
+    
+    <Button 
+      size="lg" 
+      className="relative h-14 px-10 text-lg rounded-full bg-black text-amber-400 hover:bg-cyan-400/30 hover:text-black border-0 transition-all duration-300"
+    >
+      <Link href="https://wa.me/628135979589?text=Halo%20Nusa%20Prima%20Digital,%20saya%20ingin%20bertanya%20tentang%20layanan%20website.">Konsultasi Gratis</Link> 
+    </Button>
+  </motion.div>
+
+  {/* Tombol Lihat Portfolio (Background Transparan) */}
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="relative group"
+  >
+    {/* Glow Effect */}
+    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-amber-600 rounded-full blur-md opacity-70 group-hover:opacity-100 group-hover:blur-xl transition-all duration-300" />
+    
+    <Button 
+      size="lg" 
+      variant="outline"
+      className="relative h-14 px-10 text-lg rounded-full bg-black hover:bg-cyan-400/30 text-white border-white/20 hover:border-transparent transition-all duration-300"
+    >
+      Lihat Portfolio
+    </Button>
+  </motion.div>
+</div>
       </motion.div>
     </section>
   )
 }
+

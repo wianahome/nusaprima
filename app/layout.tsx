@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { Header } from '@/components/header'
+import { Footer } from '@/components/footer'
+import { FloatingWA } from '@/components/floating-wa'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -32,11 +35,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="id" className="bg-background">
-      <body className={`${inter.variable} font-sans antialiased`}>
+    <html lang="id" className="bg-background" suppressHydrationWarning>
+      <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+        <Header />
         {children}
+        <FloatingWA />
         {process.env.NODE_ENV === 'production' && <Analytics />}
+        <Footer />
       </body>
+
     </html>
   )
 }

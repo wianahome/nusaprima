@@ -48,7 +48,7 @@ export function FAQ() {
 
   return (
     <section id="faq" className="py-20 lg:py-32 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/5 to-transparent pointer-events-none" />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -58,12 +58,12 @@ export function FAQ() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-cyan-400/10 text-cyan-400 text-sm font-medium mb-4">
             FAQ
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
             Pertanyaan yang{' '}
-            <span className="text-primary">Sering Diajukan</span>
+            <span className="text-cyan-400">Sering Diajukan</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Temukan jawaban untuk pertanyaan umum tentang layanan kami di bawah ini.
@@ -111,16 +111,16 @@ export function FAQ() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-16 p-8 rounded-3xl bg-gradient-to-br from-primary/10 via-card/50 to-primary/5 border border-primary/20 text-center"
+          className="mt-16 p-8 rounded-3xl bg-gradient-to-br from-cyan-400/10 via-card/50 to-cyan-400/5 border border-cyan-400/20 text-center"
         >
-          <MessageCircle className="w-12 h-12 text-primary mx-auto mb-4" />
+          <MessageCircle className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
           <h3 className="text-xl font-bold text-foreground mb-2">
             Masih punya pertanyaan?
           </h3>
           <p className="text-muted-foreground mb-6">
             Tim kami siap membantu menjawab semua pertanyaan Anda.
           </p>
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+          <Button className="bg-cyan-400 hover:bg-cyan-400/90 text-cyan-400-foreground">
             Hubungi Kami
           </Button>
         </motion.div>

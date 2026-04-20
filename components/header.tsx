@@ -4,14 +4,14 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const navLinks = [
-  { href: '#hero', label: 'Beranda' },
-  { href: '#about', label: 'Tentang Kami' },
-  { href: '#pricing', label: 'Harga' },
-  { href: '#gallery', label: 'Portfolio' },
-  { href: '#testimonials', label: 'Testimoni' },
-  { href: '#faq', label: 'FAQ' },
+  { href: '/', label: 'Beranda' },
+  { href: '/gallery', label: 'Portfolio' },
+  { href: '/services', label: 'Layanan' },
+    { href: '/about-us', label: 'Tentang Kami' },
 ]
 
 export function Header() {
@@ -33,88 +33,113 @@ export function Header() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-background/60 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5'
+          ? 'bg-background/60 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-cyan-400/50'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
+          
+          {/* LOGO SECTION */}
           <motion.a
-            href="#hero"
-            className="flex items-center gap-2"
+            href="/"
+            className="flex items-center gap-3"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">N</span>
+            <div className="relative w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center">
+              <Image 
+                src="/logo-nusaprima.png" 
+                alt="Logo Nusaprima Digital"
+                width={48} 
+                height={48}
+                className="object-contain mix-blend-lighten" // mix-blend-lighten membantu menghilangkan sisa background putih di dark mode
+                priority
+              />
             </div>
-            <span className="font-bold text-xl tracking-tight text-foreground">
-              Nusaprima<span className="text-primary">Digital</span>
+            <span className="font-bold text-xl lg:text-2xl tracking-tight text-foreground">
+              Nusaprima<span className="text-cyan-400">Digital</span>
             </span>
           </motion.a>
 
+          {/* DESKTOP NAVIGATION */}
           <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <motion.a
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-secondary/50"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-cyan-400/15"
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
               >
                 {link.label}
               </motion.a>
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-3">
-            <Button
-              variant="ghost"
-              className="text-muted-foreground hover:text-foreground"
+          {/* ACTION BUTTONS (DESKTOP) */}
+          <div className="hidden lg:flex items-center gap-4">
+            
+            
+            {/* MULAI SEKARANG WITH NEON EFFECT */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative group"
             >
-              Masuk
-            </Button>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              Mulai Sekarang
-            </Button>
+              {/* Glow Layer */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-cyan-400 to-yellow-600 rounded-lg blur-md opacity-60 group-hover:opacity-100 group-hover:blur-lg transition-all duration-300" />
+              
+              <Button className="relative bg-black hover:bg-black text-amber-400 hover:text-white border border-white/10 px-6 h-11 rounded-lg font-bold transition-all shadow-2xl">
+                <Link href="https://wa.me/628135979589?text=Halo%20Nusa%20Prima%20Digital,%20saya%20ingin%20bertanya%20tentang%20layanan%20website."> Mulai Sekarang </Link>
+              </Button>
+            </motion.div>
           </div>
 
+          {/* MOBILE MENU BUTTON */}
           <button
-            className="lg:hidden p-2 text-foreground"
+            className="lg:hidden p-2 text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
+      {/* MOBILE MENU DROPDOWN */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-border"
+            className="lg:hidden bg-background/95 backdrop-blur-2xl border-b border-border overflow-hidden"
           >
             <nav className="flex flex-col p-4 gap-2">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
+                  className="px-4 py-4 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-xl transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-border">
-                <Button variant="ghost" className="justify-start">
+              
+              <div className="flex flex-col gap-3 mt-4 pt-6 border-t border-border/50">
+                <Button variant="ghost" className="w-full justify-center h-12 text-base">
                   Masuk
                 </Button>
-                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                  Mulai Sekarang
-                </Button>
+                
+                {/* Mobile Neon Button */}
+                <div className="relative group w-full">
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-yellow-600 rounded-xl blur-md opacity-80" />
+                  <Button className="relative w-full bg-black hover:bg-black text-white border border-white/10 h-14 rounded-xl font-bold text-lg">
+                    Mulai Sekarang
+                  </Button>
+                </div>
               </div>
             </nav>
           </motion.div>

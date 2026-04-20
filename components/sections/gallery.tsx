@@ -77,7 +77,7 @@ export function Gallery() {
 
   return (
     <section id="gallery" className="py-20 lg:py-32 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/5 to-transparent pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -87,11 +87,11 @@ export function Gallery() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-cyan-400/10 text-cyan-400 text-sm font-medium mb-4">
             Portfolio
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
-            Karya <span className="text-primary">Terbaik</span> Kami
+            Karya <span className="text-cyan-400">Terbaik</span> Kami
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Lihat beberapa proyek yang telah kami kerjakan untuk klien dari berbagai industri.
@@ -110,7 +110,7 @@ export function Gallery() {
               onClick={() => setActiveCategory(category)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 activeCategory === category
-                  ? 'bg-primary text-primary-foreground'
+                  ? 'bg-cyan-400 text-cyan-400-foreground'
                   : 'bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
               }`}
             >
@@ -131,7 +131,7 @@ export function Gallery() {
                 layout
                 layoutId={`project-${project.id}`}
                 onClick={() => setSelectedProject(project)}
-                className="group relative overflow-hidden rounded-2xl bg-card/30 border border-border/50 hover:border-primary/50 transition-all duration-500 cursor-pointer"
+                className="group relative overflow-hidden rounded-2xl bg-card/30 border border-border/50 hover:border-cyan-400/50 transition-all duration-500 cursor-pointer"
               >
                 <div className="aspect-[4/3] relative overflow-hidden">
                   <Image
@@ -148,17 +148,17 @@ export function Gallery() {
                     initial={false}
                   >
                     <motion.div 
-                      className="w-16 h-16 rounded-full bg-primary/90 backdrop-blur-sm flex items-center justify-center"
+                      className="w-16 h-16 rounded-full bg-cyan-400/90 backdrop-blur-sm flex items-center justify-center"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <ExternalLink className="w-7 h-7 text-primary-foreground" />
+                      <ExternalLink className="w-7 h-7 text-cyan-400-foreground" />
                     </motion.div>
                   </motion.div>
 
                   <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                     <motion.button 
-                      className="w-full py-3 rounded-xl bg-primary/90 backdrop-blur-sm text-primary-foreground font-medium flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                      className="w-full py-3 rounded-xl bg-cyan-400/90 backdrop-blur-sm text-cyan-400-foreground font-medium flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -170,11 +170,11 @@ export function Gallery() {
                 
                 <div className="p-5">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                    <span className="text-xs font-medium text-cyan-400 bg-cyan-400/10 px-2.5 py-1 rounded-full">
                       {project.category}
                     </span>
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-cyan-400 transition-colors">
                     {project.title}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
@@ -232,7 +232,7 @@ export function Gallery() {
 
               <div className="p-6 lg:p-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1.5 rounded-full">
+                  <span className="text-sm font-medium text-cyan-400 bg-cyan-400/10 px-3 py-1.5 rounded-full">
                     {selectedProject.category}
                   </span>
                   <div className="flex gap-2">
@@ -258,7 +258,7 @@ export function Gallery() {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 py-3 rounded-xl bg-primary text-primary-foreground font-medium flex items-center justify-center gap-2"
+                    className="flex-1 py-3 rounded-xl bg-cyan-400 text-cyan-400-foreground font-medium flex items-center justify-center gap-2"
                   >
                     Lihat Live Demo
                     <ExternalLink className="w-4 h-4" />
