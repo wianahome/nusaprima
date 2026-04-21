@@ -211,7 +211,7 @@ export function Hero() {
           {' '}Anda
         </motion.h1>
 
-        <p className="text-2xl text-muted-foreground max-w-2xl mx-auto mb-10">
+        <p className="text-2xl text-amber-50 max-w-2xl mx-auto mb-10">
           Digital Agency yang fokus pada performa dan desain premium.
         </p>
 

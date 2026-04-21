@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'tailwindcss/theme' layer(theme); /* Tambahkan baris ini */
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));

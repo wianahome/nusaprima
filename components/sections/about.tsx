@@ -118,7 +118,7 @@ export function About() {
             Mengapa Memilih{' '}
             <span className="text-cyan-400">Nusaprima Digital</span>?
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <p className="text-lg text-amber-50 max-w-2xl mx-auto text-pretty">
             Kami adalah partner digital yang berkomitmen untuk membantu bisnis Indonesia
             berkembang melalui solusi teknologi yang inovatif dan terjangkau.
           </p>
@@ -134,12 +134,12 @@ export function About() {
               className="group p-6 lg:p-8 rounded-2xl bg-card/30 backdrop-blur-sm border border-border/50 hover:border-cyan-400/30 hover:bg-card/50 transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-xl bg-cyan-400/10 flex items-center justify-center mb-4 group-hover:bg-cyan-400/20 transition-colors">
-                <feature.icon className="w-6 h-6 text-cyan-400" />
+                <feature.icon className="w-6 h-6 text-amber-400" />
               </div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">
+              <h3 className="text-xl font-semibold text-cyan-400 mb-2">
                 {feature.title}
               </h3>
-              <p className="text-muted-foreground">
+              <p className="!text-amber-50">
                 {feature.description}
               </p>
             </motion.div>
@@ -157,7 +157,7 @@ export function About() {
               <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
                 5+ Tahun Pengalaman dalam Industri Digital
               </h3>
-              <p className="text-muted-foreground mb-6 text-pretty">
+              <p className="text-amber-50 mb-6 text-pretty">
                 Sejak 2019, kami telah membantu ratusan bisnis dari berbagai industri
                 untuk membangun presence digital yang kuat. Dari UMKM hingga enterprise,
                 kami memiliki solusi yang tepat untuk setiap kebutuhan.
@@ -171,7 +171,7 @@ export function About() {
                 ].map((stat) => (
                   <div key={stat.label} className="text-center p-4 rounded-xl bg-background/50">
                     <div className="text-2xl font-bold text-cyan-400">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                    <div className="text-sm text-amber-50">{stat.label}</div>
                   </div>
                 ))}
               </div>

@@ -80,7 +80,7 @@ export function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="max-w-2xl mx-auto text-lg text-muted-foreground"
+            className="max-w-2xl mx-auto text-lg text-gray-100"
           >
             Kami membantu transformasi digital bisnis Anda melalui teknologi mutakhir dan desain yang berorientasi pada hasil.
           </motion.p>
@@ -109,7 +109,7 @@ export function Services() {
                   {service.title}
                 </h3>
                 
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-gray-300 leading-relaxed">
                   {service.description}
                 </p>
 

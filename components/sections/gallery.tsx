@@ -93,7 +93,7 @@ export function Gallery() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
             Karya <span className="text-cyan-400">Terbaik</span> Kami
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-amber-50 max-w-2xl mx-auto">
             Lihat beberapa proyek yang telah kami kerjakan untuk klien dari berbagai industri.
           </p>
         </motion.div>
@@ -110,8 +110,8 @@ export function Gallery() {
               onClick={() => setActiveCategory(category)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 activeCategory === category
-                  ? 'bg-cyan-400 text-cyan-400-foreground'
-                  : 'bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
+                  ? 'bg-cyan-400 text-black'
+                  : 'bg-secondary/50 text-amber-50 hover:bg-secondary hover:text-foreground'
               }`}
             >
               {category}
@@ -158,7 +158,7 @@ export function Gallery() {
 
                   <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                     <motion.button 
-                      className="w-full py-3 rounded-xl bg-cyan-400/90 backdrop-blur-sm text-cyan-400-foreground font-medium flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                      className="w-full py-3 rounded-xl bg-cyan-400/90 backdrop-blur-sm text-black font-medium flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -174,17 +174,17 @@ export function Gallery() {
                       {project.category}
                     </span>
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-cyan-400 transition-colors">
+                  <h3 className="text-lg font-semibold text-amber-400 mb-2 group-hover:text-cyan-400 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                  <p className="text-sm text-amber-50 mb-4 line-clamp-2">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs px-2 py-1 rounded-full bg-secondary/50 text-muted-foreground"
+                        className="text-xs px-2 py-1 rounded-full bg-secondary/50 text-amber-500"
                       >
                         {tag}
                       </span>

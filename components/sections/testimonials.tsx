@@ -39,7 +39,7 @@ export function Testimonials() {
           <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter">
             TRUSTED BY <span className="text-cyan-400 italic">VISIONARIES</span>
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto text-sm uppercase tracking-widest font-medium">
+          <p className="text-gray-100 max-w-xl mx-auto text-sm uppercase tracking-widest font-medium">
             Membangun masa depan digital bersama klien terbaik kami.
           </p>
         </motion.div>
@@ -53,7 +53,7 @@ export function Testimonials() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               // Penjelasan: bg-transparent agar p5 terlihat jelas, border-white/10 untuk struktur tipis
-              className="group relative p-8 rounded-none border-l border-t border-white/10 hover:border-cyan-400/50 transition-all duration-700 bg-transparent"
+              className="group relative p-8 rounded-none border-l border-t border-white/5 hover:border-cyan-400/50 transition-all duration-700 bg-transparent"
             >
               {/* Ornamen pojok untuk memperkuat kesan high-tech */}
               <div className="absolute top-0 right-0 w-2 h-2 bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -77,7 +77,7 @@ export function Testimonials() {
                 </div>
                 <div>
                   <h4 className="font-bold text-white text-sm uppercase tracking-wider">{testimonial.name}</h4>
-                  <p className="text-[10px] text-cyan-500/60 uppercase font-bold tracking-widest">{testimonial.role}</p>
+                  <p className="text-[10px] text-cyan-500/90 uppercase font-bold tracking-widest">{testimonial.role}</p>
                 </div>
               </div>
             </motion.div>
@@ -104,7 +104,7 @@ function StatItem({ label, value }: { label: string; value: string }) {
   return (
     <div className="text-center group">
       <div className="text-2xl font-black text-white group-hover:text-cyan-400 transition-colors duration-500">{value}</div>
-      <div className="text-[10px] text-gray-600 uppercase tracking-[0.3em] mt-2">{label}</div>
+      <div className="text-[10px] text-gray-50 uppercase tracking-[0.3em] mt-2">{label}</div>
     </div>
   );
 }

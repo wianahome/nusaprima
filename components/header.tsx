@@ -11,7 +11,8 @@ const navLinks = [
   { href: '/', label: 'Beranda' },
   { href: '/gallery', label: 'Portfolio' },
   { href: '/services', label: 'Layanan' },
-    { href: '/about-us', label: 'Tentang Kami' },
+  { href: '/about-us', label: 'Tentang Kami' },
+  { href: '/contact', label: 'Kontak Kami' },
 ]
 
 export function Header() {
@@ -68,7 +69,7 @@ export function Header() {
               <motion.a
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-cyan-400/15"
+                className="px-4 py-2 text-sm font-medium text-amber-50 hover:text-foreground transition-colors rounded-lg hover:bg-cyan-400/15"
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}
               >

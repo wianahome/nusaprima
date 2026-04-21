@@ -71,7 +71,7 @@ export function Footer() {
                   </span>
                 </a>
 
-                <p className="text-muted-foreground mb-6 max-w-sm">
+                <p className="text-gray-100 mb-6 max-w-sm">
                   Partner digital terpercaya untuk membangun kehadiran online bisnis Anda di Bali dan seluruh Indonesia.
                   Solusi website modern, profesional, dan berkinerja tinggi.
                 </p>
@@ -79,12 +79,12 @@ export function Footer() {
                 <div className="space-y-3">
                   <a
                     href="tel:+6281234567890"
-                    className="flex items-center gap-3 text-muted-foreground hover:text-cyan-400 transition-colors"
+                    className="flex items-center gap-3 text-gray-100"
                   >
                     <Phone className="w-5 h-5 text-cyan-400" />
                     +62 813 597 9589
                   </a>
-                  <div className="flex items-start gap-3 text-muted-foreground">
+                  <div className="flex items-start gap-3 text-gray-100">
                     <MapPin className="w-5 h-5 mt-0.5 text-cyan-400" />
                     <span>
                       Jl. Pura Tegal Gading No. 5A Kuta Selatan, Bali<br />
@@ -152,7 +152,7 @@ export function Footer() {
           </div>
         </div>
                 <div className="py-6 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-gray-100">
             &copy; {new Date().getFullYear()} Nusaprima Digital. All rights reserved.
           </p> </div>  
 

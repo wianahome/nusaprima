@@ -65,7 +65,7 @@ export function FAQ() {
             Pertanyaan yang{' '}
             <span className="text-cyan-400">Sering Diajukan</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-gray-50 max-w-2xl mx-auto">
             Temukan jawaban untuk pertanyaan umum tentang layanan kami di bawah ini.
           </p>
         </motion.div>
@@ -85,7 +85,7 @@ export function FAQ() {
               >
                 <span className="font-medium text-foreground pr-4">{faq.question}</span>
                 <ChevronDown
-                  className={`w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform duration-300 ${
+                  className={`w-5 h-5 text-amber-300 flex-shrink-0 transition-transform duration-300 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
                 />
@@ -99,7 +99,7 @@ export function FAQ() {
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden"
               >
-                <p className="px-5 pb-5 text-muted-foreground">
+                <p className="px-5 pb-5 text-amber-400">
                   {faq.answer}
                 </p>
               </motion.div>
@@ -117,10 +117,10 @@ export function FAQ() {
           <h3 className="text-xl font-bold text-foreground mb-2">
             Masih punya pertanyaan?
           </h3>
-          <p className="text-muted-foreground mb-6">
+          <p className="text-gray-100 mb-6">
             Tim kami siap membantu menjawab semua pertanyaan Anda.
           </p>
-          <Button className="bg-cyan-400 hover:bg-cyan-400/90 text-cyan-400-foreground">
+          <Button className="bg-cyan-400 hover:bg-cyan-400/90 text-black">
             Hubungi Kami
           </Button>
         </motion.div>
