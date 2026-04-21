@@ -18,7 +18,6 @@ const P5Background = dynamic(
 export default function Home() {
   return (
     <main className="min-h-screen bg-background overflow-x-hidden">
-      <P5Background />
       <Hero />
       <About />
       <Gallery />
