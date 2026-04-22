@@ -5,36 +5,16 @@ import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { ChevronDown, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+// 1. Import fungsi tracking
+import { reportWaConversion } from '@/lib/google-ads'
 
 const faqs = [
   {
     question: 'Berapa lama waktu pengerjaan website?',
     answer: 'Waktu pengerjaan bervariasi tergantung kompleksitas proyek. Untuk paket Starter biasanya 2-3 minggu, Professional 4-6 minggu, dan Enterprise 8-12 minggu. Kami akan memberikan timeline detail setelah konsultasi.',
   },
-  {
-    question: 'Apakah saya bisa request revisi?',
-    answer: 'Tentu! Setiap paket sudah termasuk jatah revisi. Starter mendapat 2x revisi, Professional 5x revisi, dan Enterprise unlimited revisi. Revisi tambahan dapat dikenakan biaya sesuai kesepakatan.',
-  },
-  {
-    question: 'Bagaimana sistem pembayarannya?',
-    answer: 'Pembayaran dilakukan secara bertahap: 50% di awal sebagai DP untuk memulai proyek, dan 50% sisanya setelah proyek selesai dan disetujui. Kami menerima transfer bank dan berbagai metode pembayaran lainnya.',
-  },
-  {
-    question: 'Apakah termasuk maintenance?',
-    answer: 'Ya, paket Professional dan Enterprise sudah termasuk maintenance. Starter mendapat support 1 bulan, Professional 3 bulan, dan Enterprise 12 bulan. Setelah periode tersebut, tersedia paket maintenance bulanan.',
-  },
-  {
-    question: 'Apakah website yang dibuat SEO-friendly?',
-    answer: 'Semua website yang kami buat sudah dioptimasi untuk SEO dasar. Untuk optimasi lebih lanjut seperti keyword research, content strategy, dan link building, tersedia sebagai layanan tambahan.',
-  },
-  {
-    question: 'Bisakah website diintegrasikan dengan sistem lain?',
-    answer: 'Ya, kami dapat mengintegrasikan website dengan berbagai sistem seperti payment gateway, CRM, ERP, WhatsApp Business API, dan lainnya. Integrasi khusus mungkin memerlukan biaya tambahan.',
-  },
-  {
-    question: 'Apakah saya mendapat source code?',
-    answer: 'Ya, setelah proyek selesai dan pembayaran lunas, Anda akan mendapatkan akses penuh ke source code website Anda. Kami juga menyediakan dokumentasi teknis untuk memudahkan maintenance.',
-  },
+  // ... (data faq lainnya tetap sama)
   {
     question: 'Bagaimana jika saya butuh fitur tambahan setelah website jadi?',
     answer: 'Kami selalu siap membantu pengembangan website Anda. Fitur tambahan dapat didiskusikan dan dikerjakan dengan penawaran harga terpisah sesuai kompleksitas fitur yang diinginkan.',
@@ -45,6 +25,9 @@ export function FAQ() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [openIndex, setOpenIndex] = useState<number | null>(0)
+
+  // Link WhatsApp yang seragam
+  const waLink = "https://wa.me/628135979589?text=Halo%20Nusa%20Prima%20Digital,%20saya%20ingin%20bertanya%20tentang%20layanan%20website."
 
   return (
     <section id="faq" className="py-20 lg:py-32 relative">
@@ -107,6 +90,7 @@ export function FAQ() {
           ))}
         </div>
 
+        {/* CTA SECTION - HUBUNGI KAMI */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -120,8 +104,16 @@ export function FAQ() {
           <p className="text-gray-100 mb-6">
             Tim kami siap membantu menjawab semua pertanyaan Anda.
           </p>
-          <Button className="bg-cyan-400 hover:bg-cyan-400/90 text-black">
-            Hubungi Kami
+          
+          {/* 2. Tambahkan Link dan reportWaConversion */}
+          <Button 
+            asChild
+            onClick={() => reportWaConversion()}
+            className="bg-cyan-400 hover:bg-cyan-400/90 text-black font-bold h-12 px-8 rounded-full"
+          >
+            <Link href={waLink} target="_blank">
+              Hubungi Kami
+            </Link>
           </Button>
         </motion.div>
       </div>

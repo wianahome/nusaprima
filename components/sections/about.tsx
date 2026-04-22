@@ -148,7 +148,7 @@ export function About() {
               <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
                 5+ Tahun Pengalaman dalam Industri Digital
               </h3>
-              <p className="text-gray-400 mb-8 leading-relaxed">
+              <p className="text-gray-100 mb-8 leading-relaxed">
                 Sejak 2019, kami telah membantu ratusan bisnis dari berbagai industri
                 untuk membangun presence digital yang kuat. Dari UMKM hingga enterprise,
                 kami memiliki solusi yang tepat untuk setiap kebutuhan.

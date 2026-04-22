@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import Script from 'next/script' // 1. Import Script
 import './globals.css'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
@@ -10,6 +11,8 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 })
+
+const GA_TRACKING_ID = 'AW-123456789'; // 2. Ganti dengan ID dari Google Ads Anda
 
 export const metadata: Metadata = {
   title: 'Nusaprima Digital | Jasa Pembuatan Website Profesional',
@@ -37,13 +40,34 @@ export default function RootLayout({
   return (
     <html lang="id" className="bg-background" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+        {/* 3. Google Ads Global Tag - Hanya muncul di Production */}
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            />
+            <Script
+              id="google-ads-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${GA_TRACKING_ID}');
+                `,
+              }}
+            />
+          </>
+        )}
+
         <Header />
         {children}
         <FloatingWA />
         {process.env.NODE_ENV === 'production' && <Analytics />}
         <Footer />
       </body>
-
     </html>
   )
 }

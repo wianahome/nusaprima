@@ -5,7 +5,8 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Sparkles, Code2, Zap, Globe, Cpu, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-
+// 1. Import fungsi tracking Anda
+import { reportWaConversion } from '@/lib/google-ads' 
 
 const floatingIcons = [
   { Icon: Globe, delay: 0, position: { top: '15%', left: '10%' } },
@@ -28,6 +29,9 @@ export function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
+  // Link WhatsApp yang seragam
+  const waLink = "https://wa.me/628135979589?text=Halo%20Nusa%20Prima%20Digital,%20saya%20ingin%20bertanya%20tentang%20layanan%20website."
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWord((prev) => (prev + 1) % words.length)
@@ -37,7 +41,6 @@ export function Hero() {
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-      {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-20"
@@ -46,9 +49,6 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
       </div>
 
-
-
-      {/* Floating Elements */}
       {floatingIcons.map(({ Icon, delay, position }, index) => (
         <motion.div
           key={index}
@@ -64,8 +64,6 @@ export function Hero() {
         </motion.div>
       ))}
 
-
-      {/* Main Content */}
       <motion.div style={{ y, opacity }} className="relative z-20 text-center px-4">
         <motion.h1 className="text-6xl lg:text-8xl font-bold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
           Wujudkan Website <br />
@@ -88,43 +86,43 @@ export function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-  {/* Tombol Konsultasi Gratis (Background Yellow-600) */}
-  <motion.div
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    className="relative group"
-  >
-    {/* Glow Effect */}
-    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-amber-600 rounded-full blur-md opacity-70 group-hover:opacity-100 group-hover:blur-xl transition-all duration-300" />
-    
-    <Button 
-      size="lg" 
-      className="relative h-14 px-10 text-lg rounded-full bg-black text-amber-400 hover:bg-cyan-400/30 hover:text-black border-0 transition-all duration-300"
-    >
-      <Link href="https://wa.me/628135979589?text=Halo%20Nusa%20Prima%20Digital,%20saya%20ingin%20bertanya%20tentang%20layanan%20website.">Konsultasi Gratis</Link> 
-    </Button>
-  </motion.div>
+          {/* Tombol Konsultasi Gratis */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-amber-600 rounded-full blur-md opacity-70 group-hover:opacity-100 group-hover:blur-xl transition-all duration-300" />
+            
+            {/* 2. Tambahkan onClick untuk trigger tracking */}
+            <Button 
+              size="lg" 
+              onClick={() => reportWaConversion()}
+              className="relative h-14 px-10 text-lg rounded-full bg-black text-amber-400 hover:bg-cyan-400/30 hover:text-black border-0 transition-all duration-300"
+            >
+              <Link href={waLink} target="_blank">Konsultasi Gratis</Link> 
+            </Button>
+          </motion.div>
 
-  {/* Tombol Lihat Portfolio (Background Transparan) */}
-  <motion.div
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    className="relative group"
-  >
-    {/* Glow Effect */}
-    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-amber-600 rounded-full blur-md opacity-70 group-hover:opacity-100 group-hover:blur-xl transition-all duration-300" />
-    
-    <Button 
-      size="lg" 
-      variant="outline"
-      className="relative h-14 px-10 text-lg rounded-full bg-black hover:bg-cyan-400/30 text-white border-white/20 hover:border-transparent transition-all duration-300"
-    >
-      Lihat Portfolio
-    </Button>
-  </motion.div>
-</div>
+          {/* Tombol Lihat Portfolio */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-amber-600 rounded-full blur-md opacity-70 group-hover:opacity-100 group-hover:blur-xl transition-all duration-300" />
+            
+            <Button 
+              size="lg" 
+              variant="outline"
+              asChild // Gunakan asChild jika membungkus Link agar styling Button tetap rapi
+              className="relative h-14 px-10 text-lg rounded-full bg-black hover:bg-cyan-400/30 text-white border-white/20 hover:border-transparent transition-all duration-300"
+            >
+              <Link href="/gallery">Lihat Portfolio</Link>
+            </Button>
+          </motion.div>
+        </div>
       </motion.div>
     </section>
   )
 }
-

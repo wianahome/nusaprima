@@ -6,6 +6,8 @@ import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
+// 1. Import fungsi tracking dari file google-ads Anda
+import { reportWaConversion } from '@/lib/google-ads' 
 
 const navLinks = [
   { href: '/', label: 'Beranda' },
@@ -18,6 +20,9 @@ const navLinks = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  // Link WhatsApp yang seragam
+  const waLink = "https://wa.me/628135979589?text=Halo%20Nusa%20Prima%20Digital,%20saya%20ingin%20bertanya%20tentang%20layanan%20website."
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,7 +59,7 @@ export function Header() {
                 alt="Logo Nusaprima Digital"
                 width={48} 
                 height={48}
-                className="object-contain mix-blend-lighten" // mix-blend-lighten membantu menghilangkan sisa background putih di dark mode
+                className="object-contain mix-blend-lighten"
                 priority
               />
             </div>
@@ -80,19 +85,19 @@ export function Header() {
 
           {/* ACTION BUTTONS (DESKTOP) */}
           <div className="hidden lg:flex items-center gap-4">
-            
-            
-            {/* MULAI SEKARANG WITH NEON EFFECT */}
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="relative group"
             >
-              {/* Glow Layer */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-cyan-400 to-yellow-600 rounded-lg blur-md opacity-60 group-hover:opacity-100 group-hover:blur-lg transition-all duration-300" />
               
-              <Button className="relative bg-black hover:bg-black text-amber-400 hover:text-white border border-white/10 px-6 h-11 rounded-lg font-bold transition-all shadow-2xl">
-                <Link href="https://wa.me/628135979589?text=Halo%20Nusa%20Prima%20Digital,%20saya%20ingin%20bertanya%20tentang%20layanan%20website."> Mulai Sekarang </Link>
+              {/* 2. Tambahkan onClick untuk trigger tracking di Desktop */}
+              <Button 
+                onClick={() => reportWaConversion()}
+                className="relative bg-black hover:bg-black text-amber-400 hover:text-white border border-white/10 px-6 h-11 rounded-lg font-bold transition-all shadow-2xl"
+              >
+                <Link href={waLink} target="_blank"> Mulai Sekarang </Link>
               </Button>
             </motion.div>
           </div>
@@ -137,7 +142,16 @@ export function Header() {
                 {/* Mobile Neon Button */}
                 <div className="relative group w-full">
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-yellow-600 rounded-xl blur-md opacity-80" />
-                  <Button className="relative w-full bg-black hover:bg-black text-white border border-white/10 h-14 rounded-xl font-bold text-lg">
+                  
+                  {/* 3. Tambahkan onClick untuk trigger tracking di Mobile */}
+                  <Button 
+                    onClick={() => {
+                      reportWaConversion();
+                      window.open(waLink, '_blank');
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="relative w-full bg-black hover:bg-black text-white border border-white/10 h-14 rounded-xl font-bold text-lg"
+                  >
                     Mulai Sekarang
                   </Button>
                 </div>
