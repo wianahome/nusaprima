@@ -14,6 +14,8 @@ const navLinks = [
   { href: '/gallery', label: 'Portfolio' },
   { href: '/services', label: 'Layanan' },
   { href: '/about-us', label: 'Tentang Kami' },
+  { href: '/jasa-google-ads', label: 'Jasa Google Ads' },
+  { href: '/jasa-seo', label: 'Jasa Seo' },
   { href: '/contact', label: 'Kontak Kami' },
 ]
 
