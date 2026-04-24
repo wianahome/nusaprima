@@ -91,9 +91,9 @@ export function Gallery({ keyword }: HeroProps) {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-cyan-400/10 text-cyan-400 text-sm font-medium mb-4">
+          <h3 className="inline-block px-4 py-1.5 rounded-full bg-cyan-400/10 text-cyan-400 text-sm font-medium mb-4">
             {keyword}
-          </span>
+          </h3>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
             Karya <span className="text-cyan-400">Terbaik</span> Kami
           </h2>
