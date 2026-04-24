@@ -65,7 +65,11 @@ const projects = [
 
 const categories = ['Semua', 'E-Commerce', 'SaaS', 'Real Estate', 'Healthcare', 'Education', 'Travel']
 
-export function Gallery() {
+interface HeroProps {
+  keyword: string;
+}
+
+export function Gallery({ keyword }: HeroProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [activeCategory, setActiveCategory] = useState('Semua')
@@ -88,7 +92,7 @@ export function Gallery() {
           className="text-center mb-12"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-cyan-400/10 text-cyan-400 text-sm font-medium mb-4">
-            Portfolio
+            {keyword}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
             Karya <span className="text-cyan-400">Terbaik</span> Kami

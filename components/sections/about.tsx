@@ -86,7 +86,11 @@ function TechAnimation() {
   )
 }
 
-export function About() {
+interface HeroProps {
+  keyword: string;
+}
+
+export function About({ keyword }: HeroProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
@@ -102,9 +106,9 @@ export function About() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-cyan-400/10 text-cyan-400 text-sm font-medium mb-4">
-            Tentang Kami
-          </span>
+          <h2 className="inline-block px-4 py-1.5 rounded-full bg-cyan-400/10 text-cyan-400 text-sm font-medium mb-4">
+            {keyword}
+          </h2>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
             Mengapa Memilih{' '}
             <span className="text-cyan-400">Nusaprima Digital</span>?

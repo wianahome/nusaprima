@@ -15,9 +15,13 @@ const floatingIcons = [
   { Icon: Shield, delay: 0.6, position: { bottom: '20%', right: '10%' } },
 ]
 
+interface HeroProps {
+  keyword: string;
+}
+
 const words = ['Inovatif', 'Modern', 'Responsif', 'Powerful']
 
-export function Hero() {
+export function Hero ({ keyword }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [currentWord, setCurrentWord] = useState(0)
   
@@ -63,8 +67,19 @@ export function Hero() {
           </div>
         </motion.div>
       ))}
+      
 
       <motion.div style={{ y, opacity }} className="relative z-20 text-center px-4">
+              <div className="flex flex-col items-center text-center mb-5">
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xl font-medium mb-4"
+                >
+                  {keyword}
+                </motion.h1>
+                </div>
         <motion.h1 className="text-6xl lg:text-8xl font-bold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
           Wujudkan Website <br />
           <AnimatePresence mode="wait">

@@ -10,12 +10,20 @@ import HeroBackground from '@/components/p5/cyanAmber'
 
 
 
-export default function Home() {
+export default function Home ({searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  // Mengambil keyword dari URL, fallback ke kata kunci default jika tidak ada
+  const keyword = typeof searchParams.keyword === 'string' ? searchParams.keyword : 'Nusaprima Digital';
+
+
+
   return (
     <main className="min-h-screen bg-background overflow-x-hidden">
-      <Hero />
-      <About />
-      <Gallery />
+      <Hero keyword={keyword} />
+      <About keyword={keyword} />
+      <Gallery keyword={keyword} />
       <Testimonials />
       <FAQ />
     </main>
