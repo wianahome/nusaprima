@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 // 1. Import fungsi tracking Anda
 import { reportWaConversion } from '@/lib/google-ads' 
+import Image from 'next/image'
 
 const floatingIcons = [
   { Icon: Globe, delay: 0, position: { top: '15%', left: '10%' } },
@@ -46,11 +47,14 @@ export function Hero ({ keyword }: HeroProps) {
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072')` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+        <Image
+           src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072"
+            alt="Nusa Prima Digital Background"
+            fill
+            priority // Ini akan mempercepat LCP secara drastis
+            className="object-cover opacity-20"
+            sizes="100vw"
+  />
       </div>
 
       {floatingIcons.map(({ Icon, delay, position }, index) => (

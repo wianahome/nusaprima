@@ -1,29 +1,23 @@
-import dynamic from 'next/dynamic'
-import { Header } from '@/components/header'
+import nextDynamic from 'next/dynamic'
 import { Hero } from '@/components/sections/hero'
 import { About } from '@/components/sections/about'
-import { Gallery } from '@/components/sections/gallery'
-import { Testimonials } from '@/components/sections/testimonials'
-import { FAQ } from '@/components/sections/faq'
-import { Footer } from '@/components/footer'
-import HeroBackground from '@/components/p5/cyanAmber'
 
 
+// Gunakan nextDynamic untuk komponen bawah
+const Gallery = nextDynamic(() => import('@/components/sections/gallery').then(mod => mod.Gallery))
+const Testimonials = nextDynamic(() => import('@/components/sections/testimonials').then(mod => mod.Testimonials))
+const FAQ = nextDynamic(() => import('@/components/sections/faq').then(mod => mod.FAQ))
 
-export default function Home ({searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined }
-}) {
-  // Mengambil keyword dari URL, fallback ke kata kunci default jika tidak ada
-  const keyword = typeof searchParams.keyword === 'string' ? searchParams.keyword : 'Nusaprima Digital';
+export const dynamic = 'force-dynamic';
 
-
+export default function Home({ searchParams }: { searchParams: { keyword?: string } }) {
+  const selectedKeyword = searchParams.keyword || 'Nusaprima Digital';
 
   return (
     <main className="min-h-screen bg-background overflow-x-hidden">
-      <Hero keyword={keyword} />
-      <About keyword={keyword} />
-      <Gallery keyword={keyword} />
+      <Hero keyword={selectedKeyword} />
+      <About keyword={selectedKeyword} />
+      <Gallery keyword={selectedKeyword} />
       <Testimonials />
       <FAQ />
     </main>
