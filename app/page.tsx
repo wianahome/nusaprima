@@ -11,7 +11,7 @@ const FAQ = nextDynamic(() => import('@/components/sections/faq').then(mod => mo
 export const dynamic = 'force-dynamic';
 
 export default function Home({ searchParams }: { searchParams: { keyword?: string } }) {
-  const selectedKeyword = searchParams.keyword || 'Nusaprima Digital';
+  const selectedKeyword = searchParams.keyword || 'Jasa Pembuatan Website Professional';
 
   return (
     <main className="min-h-screen bg-background overflow-x-hidden">
