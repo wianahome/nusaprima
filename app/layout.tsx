@@ -10,6 +10,7 @@ import { FloatingWA } from '@/components/floating-wa'
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
+  display:'swap',
 })
 
 const GA_TRACKING_ID = 'AW-123456789'; // 2. Ganti dengan ID dari Google Ads Anda
