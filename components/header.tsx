@@ -55,7 +55,7 @@ export function Header() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <div className="relative w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center">
+            <div className="relative w-10 h-10 w-12 h-12 flex items-center justify-center">
               <Image 
                 src="/logo-nusaprima.png" 
                 alt="Logo Nusaprima Digital"
