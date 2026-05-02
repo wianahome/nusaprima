@@ -1,4 +1,16 @@
+import { Metadata } from 'next';
 import { FaqSeo } from "@/components/FaqSeo";
+
+export const metadata: Metadata = {
+  title: 'Jasa SEO Profesional & Bergaransi Halaman 1 Google | Nusaprima',
+  description: 'Tingkatkan trafik organik dan penjualan Anda dengan Jasa SEO dari Nusaprima. Strategi white-hat SEO aman, transparan, dan terbukti masuk halaman 1 Google.',
+  keywords: ['jasa seo', 'jasa optimasi seo', 'pakar seo', 'jasa seo bergaransi', 'jasa seo website'],
+  openGraph: {
+    title: 'Jasa SEO Profesional & Bergaransi Halaman 1 Google | Nusaprima',
+    description: 'Tingkatkan trafik organik dan penjualan Anda dengan Jasa SEO dari Nusaprima. Strategi white-hat SEO aman, transparan, dan terbukti masuk halaman 1 Google.',
+    type: 'website',
+  },
+};
 import PortfolioSeo from "@/components/PortfolioSeo";
 import ProcessSeo from "@/components/ProcessSeo";
 import AboutSeo from "@/components/sections/AboutSeo";

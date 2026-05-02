@@ -18,6 +18,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${title} | Nusa Prima Digital`,
     description: "Layanan jasa pembuatan website di Bali menggunakan Next.js. Cepat, SEO friendly, dan desain premium untuk bisnis Anda.",
+    keywords: ['jasa pembuatan website bali', 'web design bali', 'jasa web developer bali', 'pembuatan website denpasar', 'bikin web bali'],
+    openGraph: {
+      title: `${title} | Nusa Prima Digital`,
+      description: "Layanan jasa pembuatan website di Bali menggunakan Next.js. Cepat, SEO friendly, dan desain premium untuk bisnis Anda.",
+      type: 'website',
+    },
     alternates: {
       canonical: `https://nusaprimadigital.com/${slug}`,
     }
