@@ -7,6 +7,7 @@ import { HeroGoogleAds } from "@/components/sections/HeroAds";
 import { PortfolioAds } from "@/components/sections/PortofolioAds";
 import { ProcessAds } from "@/components/sections/ProcessAds";
 import { TestimonialsAds } from "@/components/sections/TstimonialsAds";
+import ServicesSection from "@/components/LayananAds";
 
 export const metadata: Metadata = {
     title: 'Jasa Iklan Google Ads Profesional & Tertarget | Nusaprima',
@@ -33,7 +34,7 @@ export default function GoogleAds() {
                 <PortfolioAds />
             </div>
             <div id="layanan" className="scroll-mt-20">
-                <PricingAds />
+                <ServicesSection />
             </div>
             <div id="testimoni" className="scroll-mt-20">
                 <TestimonialsAds />

@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Sparkles, Target, TrendingUp, Search, Rocket, BarChart3 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { reportWaConversion } from '@/lib/google-ads' 
+import { reportWaConversion } from '@/lib/google-ads'
 
 const floatingIcons = [
   { Icon: Target, delay: 0, position: { top: '15%', left: '10%' } },
@@ -21,7 +21,7 @@ const words = ['Profitabel', 'Tertarget', 'Efektif', 'Powerful']
 export function HeroGoogleAds() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [currentWord, setCurrentWord] = useState(0)
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start']
@@ -43,7 +43,7 @@ export function HeroGoogleAds() {
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       <div className="absolute inset-0 z-0">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           // Menggunakan gambar bertema data/statistik yang lebih cocok untuk Ads
           style={{ backgroundImage: `url('https://images.unsplash.com/photo-1551288049-bbbda546697c?q=80&w=2070')` }}
@@ -66,7 +66,19 @@ export function HeroGoogleAds() {
         </motion.div>
       ))}
 
-      <motion.div style={{ y, opacity }} className="relative z-20 text-center px-4">
+      <motion.div style={{ y, opacity } as any} className="relative z-20 text-center px-4">
+        <div className="flex flex-col items-center text-center mb-5">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xl font-medium mb-4"
+          >
+            Jasa Iklan Google Ads
+          </motion.h1>
+        </div>
+
+
         <motion.h1 className="text-6xl lg:text-8xl font-bold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
           Iklan Google yang <br />
           <AnimatePresence mode="wait">
@@ -95,13 +107,13 @@ export function HeroGoogleAds() {
             className="relative group"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-amber-600 rounded-full blur-md opacity-70 group-hover:opacity-100 group-hover:blur-xl transition-all duration-300" />
-            
-            <Button 
-              size="lg" 
+
+            <Button
+              size="lg"
               onClick={() => reportWaConversion()}
               className="relative h-14 px-10 text-lg rounded-full bg-black text-amber-400 hover:bg-cyan-400/30 hover:text-black border-0 transition-all duration-300"
             >
-              <Link href={waLink} target="_blank">Mulai Iklan Sekarang</Link> 
+              <Link href={waLink} target="_blank">Mulai Iklan Sekarang</Link>
             </Button>
           </motion.div>
 
@@ -112,11 +124,11 @@ export function HeroGoogleAds() {
             className="relative group"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-amber-600 rounded-full blur-md opacity-70 group-hover:opacity-100 group-hover:blur-xl transition-all duration-300" />
-            
-            <Button 
-              size="lg" 
+
+            <Button
+              size="lg"
               variant="outline"
-              asChild 
+              asChild
               className="relative h-14 px-10 text-lg rounded-full bg-black hover:bg-cyan-400/30 text-white border-white/20 hover:border-transparent transition-all duration-300"
             >
               <Link href="/case-studies">Lihat Case Study</Link>
