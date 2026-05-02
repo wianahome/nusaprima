@@ -13,7 +13,7 @@ const inter = Inter({
   display:'swap',
 })
 
-const GA_TRACKING_ID = 'AW-123456789'; // 2. Ganti dengan ID dari Google Ads Anda
+const GA_TRACKING_ID = 'AW-18134268066'; // 2. Ganti dengan ID dari Google Ads Anda
 
 export const metadata: Metadata = {
   title: 'Nusaprima Digital | Jasa Pembuatan Website Profesional',
