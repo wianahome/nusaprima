@@ -5,6 +5,7 @@ import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { ExternalLink, ArrowUpRight, X } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link' // 1. Import Link dari Next.js
 
 const projects = [
   {
@@ -15,6 +16,7 @@ const projects = [
     image: '/images/portfolio/fashion-ecommerce.jpg',
     color: 'from-rose-500/20 to-orange-500/20',
     tags: ['Next.js', 'Stripe', 'Tailwind'],
+    liveDemoUrl: '/fashion', // 2. Arahkan URL ke path internal web kamu
   },
   {
     id: 2,
@@ -24,6 +26,7 @@ const projects = [
     image: '/images/portfolio/pos-system.jpg',
     color: 'from-blue-500/20 to-cyan-500/20',
     tags: ['React', 'Node.js', 'PostgreSQL'],
+    liveDemoUrl: '/restopos',
   },
   {
     id: 3,
@@ -33,6 +36,7 @@ const projects = [
     image: '/images/portfolio/property-portal.jpg',
     color: 'from-green-500/20 to-emerald-500/20',
     tags: ['Next.js', 'Supabase', 'Maps API'],
+    liveDemoUrl: '/propertyhub',
   },
   {
     id: 4,
@@ -42,6 +46,7 @@ const projects = [
     image: '/images/portfolio/healthcare-app.jpg',
     color: 'from-purple-500/20 to-pink-500/20',
     tags: ['React', 'Firebase', 'Twilio'],
+    liveDemoUrl: '/healthcare',
   },
   {
     id: 5,
@@ -51,6 +56,7 @@ const projects = [
     image: '/images/portfolio/education-platform.jpg',
     color: 'from-amber-500/20 to-yellow-500/20',
     tags: ['Next.js', 'AWS', 'Stripe'],
+    liveDemoUrl: '/edulearn',
   },
   {
     id: 6,
@@ -60,8 +66,12 @@ const projects = [
     image: '/images/portfolio/travel-booking.jpg',
     color: 'from-teal-500/20 to-cyan-500/20',
     tags: ['Vue.js', 'Laravel', 'Midtrans'],
+    liveDemoUrl: '/travelgo',
   },
 ]
+
+// Membuat komponen Motion Link agar animasi Framer Motion tetap berjalan pada Link Next.js
+const MotionLink = motion.create(Link)
 
 const categories = ['Semua', 'E-Commerce', 'SaaS', 'Real Estate', 'Healthcare', 'Education', 'Travel']
 
@@ -259,14 +269,19 @@ export function Gallery({ keyword }: HeroProps) {
                 </p>
 
                 <div className="flex gap-4">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="flex-1 py-3 rounded-xl bg-cyan-400 text-cyan-400-foreground font-medium flex items-center justify-center gap-2"
-                  >
-                    Lihat Live Demo
-                    <ExternalLink className="w-4 h-4" />
-                  </motion.button>
+                  {/* 3. Gunakan MotionLink untuk berpindah ke /web-porto */}
+                  {selectedProject.liveDemoUrl && (
+                    <MotionLink
+                      href={selectedProject.liveDemoUrl}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="flex-1 py-3 rounded-xl bg-cyan-400 text-black font-medium flex items-center justify-center gap-2 cursor-pointer text-center"
+                    >
+                      Lihat Live Demo
+                      <ExternalLink className="w-4 h-4" />
+                    </MotionLink>
+                  )}
+                  
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}

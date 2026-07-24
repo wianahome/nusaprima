@@ -6,8 +6,7 @@ import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
-// 1. Import fungsi tracking dari file google-ads Anda
-import { reportWaConversion } from '@/lib/google-ads' 
+import { reportWaConversion } from '@/lib/google-ads'
 
 const navLinks = [
   { href: '/', label: 'Beranda' },
@@ -19,12 +18,11 @@ const navLinks = [
   { href: '/contact', label: 'Kontak Kami' },
 ]
 
+const waLink = "https://wa.me/628135979589?text=Halo%20Nusa%20Prima%20Digital,%20saya%20ingin%20bertanya%20tentang%20layanan%20website."
+
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  // Link WhatsApp yang seragam
-  const waLink = "https://wa.me/628135979589?text=Halo%20Nusa%20Prima%20Digital,%20saya%20ingin%20bertanya%20tentang%20layanan%20website."
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,45 +45,44 @@ export function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          
-          {/* LOGO SECTION */}
-          <motion.a
-            href="/"
-            className="flex items-center gap-3"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <div className="relative w-10 h-10 w-12 h-12 flex items-center justify-center">
-              <Image 
-                src="/logo-nusaprima.png" 
-                alt="Logo Nusaprima Digital"
-                width={48} 
-                height={48}
-                className="object-contain mix-blend-lighten"
-                priority
-              />
-            </div>
-            <span className="font-bold text-xl lg:text-2xl tracking-tight text-foreground">
-              Nusaprima<span className="text-cyan-400">Digital</span>
-            </span>
-          </motion.a>
 
-          {/* DESKTOP NAVIGATION */}
+          <Link href="/" className="flex items-center gap-3">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-3"
+            >
+              <div className="relative w-12 h-12 flex items-center justify-center">
+                <Image
+                  src="/logo-nusaprima.png"
+                  alt="Logo Nusaprima Digital"
+                  width={48}
+                  height={48}
+                  className="object-contain mix-blend-lighten"
+                  priority
+                />
+              </div>
+              <span className="font-bold text-xl lg:text-2xl tracking-tight text-foreground">
+                Nusaprima<span className="text-cyan-400">Digital</span>
+              </span>
+            </motion.div>
+          </Link>
+
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 text-sm font-medium text-amber-50 hover:text-foreground transition-colors rounded-lg hover:bg-cyan-400/15"
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 0 }}
-              >
-                {link.label}
-              </motion.a>
+              <motion.div key={link.href} whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
+                <Link
+                  href={link.href}
+                  className="px-4 py-2 text-sm font-medium text-amber-50 hover:text-foreground transition-colors rounded-lg hover:bg-cyan-400/15 inline-block"
+                >
+                  {link.label}
+                </Link>
+              </motion.div>
             ))}
           </nav>
 
-          {/* ACTION BUTTONS (DESKTOP) */}
+          {/* Action Button (Desktop) */}
           <div className="hidden lg:flex items-center gap-4">
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -93,18 +90,16 @@ export function Header() {
               className="relative group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-cyan-400 to-yellow-600 rounded-lg blur-md opacity-60 group-hover:opacity-100 group-hover:blur-lg transition-all duration-300" />
-              
-              {/* 2. Tambahkan onClick untuk trigger tracking di Desktop */}
-              <Button 
+              <Button
                 onClick={() => reportWaConversion()}
                 className="relative bg-black hover:bg-black text-amber-400 hover:text-white border border-white/10 px-6 h-11 rounded-lg font-bold transition-all shadow-2xl"
               >
-                <Link href={waLink} target="_blank"> Mulai Sekarang </Link>
+                <Link href={waLink} target="_blank">Mulai Sekarang</Link>
               </Button>
             </motion.div>
           </div>
 
-          {/* MOBILE MENU BUTTON */}
+          {/* Mobile Menu Button */}
           <button
             className="lg:hidden p-2 text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -115,7 +110,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* MOBILE MENU DROPDOWN */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -126,31 +121,24 @@ export function Header() {
           >
             <nav className="flex flex-col p-4 gap-2">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   className="px-4 py-4 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-xl transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
-              
+
               <div className="flex flex-col gap-3 mt-4 pt-6 border-t border-border/50">
-                <Button variant="ghost" className="w-full justify-center h-12 text-base">
-                  Masuk
-                </Button>
-                
-                {/* Mobile Neon Button */}
                 <div className="relative group w-full">
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-yellow-600 rounded-xl blur-md opacity-80" />
-                  
-                  {/* 3. Tambahkan onClick untuk trigger tracking di Mobile */}
-                  <Button 
+                  <Button
                     onClick={() => {
-                      reportWaConversion();
-                      window.open(waLink, '_blank');
-                      setIsMobileMenuOpen(false);
+                      reportWaConversion()
+                      window.open(waLink, '_blank')
+                      setIsMobileMenuOpen(false)
                     }}
                     className="relative w-full bg-black hover:bg-black text-white border border-white/10 h-14 rounded-xl font-bold text-lg"
                   >

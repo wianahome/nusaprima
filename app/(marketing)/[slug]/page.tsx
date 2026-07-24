@@ -1,42 +1,54 @@
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { BASE_URL, DEFAULT_OG_IMAGE, SITE_NAME } from '@/lib/site'
 
 interface PageProps {
-  params: { slug: string };
+  params: { slug: string }
 }
 
-// 1. Fungsi Metadata Dinamis untuk SEO
+const PILLAR_PAGES: Record<string, string> = {
+  'jasa-web-bali': 'Jasa Pembuatan Website Bali & Web Design Profesional',
+  'jasa-pembuatan-website-denpasar': 'Jasa Web Design Denpasar',
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = params;
-  
-  // Nanti data ini diambil dari Database/n8n
-  // Contoh simulasi:
-  const title = slug === 'jasa-web-bali' 
-    ? "Jasa Pembuatan Website Bali & Web Design Profesional" 
-    : "Jasa Web Design Denpasar";
+  const { slug } = params
+  const title = PILLAR_PAGES[slug]
+
+  if (!title) {
+    return { title: 'Halaman Tidak Ditemukan | Nusaprima Digital' }
+  }
+
+  const description = 'Layanan jasa pembuatan website di Bali menggunakan Next.js. Cepat, SEO friendly, dan desain premium untuk bisnis Anda.'
 
   return {
-    title: `${title} | Nusa Prima Digital`,
-    description: "Layanan jasa pembuatan website di Bali menggunakan Next.js. Cepat, SEO friendly, dan desain premium untuk bisnis Anda.",
+    title: `${title} | Nusaprima Digital`,
+    description,
     keywords: ['jasa pembuatan website bali', 'web design bali', 'jasa web developer bali', 'pembuatan website denpasar', 'bikin web bali'],
     openGraph: {
-      title: `${title} | Nusa Prima Digital`,
-      description: "Layanan jasa pembuatan website di Bali menggunakan Next.js. Cepat, SEO friendly, dan desain premium untuk bisnis Anda.",
+      title: `${title} | Nusaprima Digital`,
+      description,
       type: 'website',
+      siteName: SITE_NAME,
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} | Nusaprima Digital`,
+      description,
+      images: [DEFAULT_OG_IMAGE],
     },
     alternates: {
-      canonical: `https://nusaprimadigital.com/${slug}`,
-    }
-  };
+      canonical: `${BASE_URL}/${slug}`,
+    },
+  }
 }
 
-// 2. Komponen Utama Halaman
 export default function PillarPage({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } = params
 
-  // Proteksi sederhana jika slug tidak dikenal (Nanti sesuaikan dengan DB)
-  if (slug !== 'jasa-web-bali' && slug !== 'jasa-pembuatan-website-denpasar') {
-    return notFound();
+  if (!PILLAR_PAGES[slug]) {
+    return notFound()
   }
 
   return (
