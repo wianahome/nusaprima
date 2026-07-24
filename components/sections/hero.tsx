@@ -101,7 +101,7 @@ export function Hero ({ keyword }: HeroProps) {
         </motion.h1>
 
         <p className="text-2xl text-amber-50 max-w-2xl mx-auto mb-10">
-          Digital Agency yang fokus pada performa dan desain premium.
+         <h2> Solusi Jasa Website Bali & Web Desain Cepat, Modern, dan Siap Naikkan Penjualan Bisnis Anda. </h2>
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">

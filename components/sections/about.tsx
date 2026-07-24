@@ -111,7 +111,8 @@ export function About({ keyword }: HeroProps) {
           </h2>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
             Mengapa Memilih{' '}
-            <span className="text-cyan-400">Nusaprima Digital</span>?
+            <span className="text-cyan-400">Jasa Web Desain Bali </span>
+            Kami?
           </h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             Kami adalah partner digital yang berkomitmen untuk membantu bisnis Indonesia
