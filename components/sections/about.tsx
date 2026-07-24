@@ -115,7 +115,7 @@ export function About({ keyword }: HeroProps) {
             Kami?
           </h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Kami adalah partner digital yang berkomitmen untuk membantu bisnis Indonesia
+            Kami adalah penyedia web creator dan partner digital yang berkomitmen untuk membantu bisnis Anda
             berkembang melalui solusi teknologi yang inovatif dan terjangkau.
           </p>
         </motion.div>
